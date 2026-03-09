@@ -105,7 +105,7 @@
     h1, h2, h3 { font-family: 'Cinzel', serif; text-align: center; text-transform: uppercase; margin: 15px 0; }
     h1 { font-size: 2.2em; color: #ff3333; letter-spacing: 2px; }
     h2 { font-size: 1.5em; color: #ffffff; border-bottom: 1px solid #8b0000; padding-bottom: 5px; }
-    h3 { color: #ff3333; font-size: 1.1em; }
+    h3 { color: #ff3333; font-size: 1.1em; letter-spacing: 1px; }
 
     .details {
         text-align: center;
@@ -124,6 +124,11 @@
         margin-top: 20px;
     }
 
+    /* Make grid 2 columns on slightly wider screens */
+    @media (min-width: 700px) {
+        .entourage-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     .entourage-list {
         background-color: #111;
         padding: 15px;
@@ -139,7 +144,7 @@
         text-align: center;
     }
 
-    .name-columns li { padding: 2px 0; font-size: 0.85em; font-weight: 300; border-bottom: 1px solid #222; }
+    .name-columns li { padding: 4px 0; font-size: 0.85em; font-weight: 300; border-bottom: 1px solid #222; }
 
     /* --- GIFT SECTION --- */
     .gift-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 500px; margin: 0 auto; }
@@ -214,24 +219,49 @@
         <p>DATE: <span class="highlight">MARCH 21, 2026</span></p>
         <p>TIME: <span class="highlight">4:00 PM - 9:00 PM</span></p>
         <div class="btn-container">
-<a href="https://www.google.com/maps/search/?api=1&query=28+San+Pedro+Novaliches+Quezon+City" target="_blank" class="btn">📍 View Location on Map</a>            <p style="font-size: 0.9em; margin-top: 10px;">28 San Pedro, Novaliches, QC</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=28+San+Pedro,+Novaliches,+Quezon+City" target="_blank" class="btn">📍 View Location on Map</a>
+            <p style="font-size: 0.9em; margin-top: 10px;">28 San Pedro, Novaliches, QC</p>
         </div>
     </div>
 
     <h2>The Entourage</h2>
     <div class="entourage-grid">
+        
         <div class="entourage-list">
             <h3>18 Candles</h3>
             <ul class="name-columns">
-                <li>Alisha Manalo</li><li>Nicole Goña</li><li>Xiamara Goña</li><li>Eden Prejillana</li><li>Jose Orogo</li><li>Janna Jimbul</li><li>Alex Intoy</li><li>Aireen Mercado</li><li>Jillian Taparan</li><li>Reynalyn Bermudo</li><li>Jacob Salmingo</li><li>Ken Dela Cruz</li><li>Cheryl Estrella</li><li>Alexander Dizon</li><li>Johnlloyd Lucasia</li><li>Jyasie Arbois</li><li>Aldrine Arbois</li><li>Luz Prejillana</li><li>Judith Jimbul</li>
+                <li>Alisha Loraine Manalo</li><li>Nicole Goña</li><li>Xiamara Goña</li><li>Eden Prejillana</li><li>Jose Carlos Orogo</li><li>Janna Paula Jimbul</li><li>Alex Intoy</li><li>Aireen Mercado</li><li>Jillian Taparan</li><li>Reynalyn Bermudo</li><li>Jacob Salmingo</li><li>Ken Dela Cruz</li><li>Cheryl Estrella</li><li>Alexander Dizon</li><li>Johnlloyd Lucasia</li><li>Jyasie Scarlette Arbois</li><li>Aldrine Arbois</li><li>Luz Prejillana</li><li>Judith Anne Jimbul</li>
             </ul>
         </div>
+
         <div class="entourage-list">
             <h3>18 Roses</h3>
             <ul class="name-columns">
-                <li>Jordennis Prejillana</li><li>Enzi Valenzuela</li><li>Christian Sabangan</li><li>Hero Vicoy</li><li>Jerome Ronnie Lopez</li><li>Reyan Reyes</li><li>Reymundo Mateo</li><li>Cyron Florendo</li><li>Justin Edanio</li><li>Lance San Juan</li><li>Joy Jimbul</li><li>Jamil Arbois</li><li>Clinton Oledan</li><li>Julius Jimbul</li><li>Janssen Paul Jimbul</li><li>Jesus Arbois</li><li>Aldrine Arbois</li>
+                <li>Jordennis Prejillana</li><li>Enzi Carter Valenzuela</li><li>Christian Ivan Sabangan</li><li>Hero Vicoy</li><li>Jerome Ronnie Lopez</li><li>Reyan Mathew Reyes</li><li>Reymundo Mateo</li><li>Cyron Florendo</li><li>Justin Edanio</li><li>Lance Kratos San Juan</li><li>Joy Jimbul</li><li>Jamil Arbois</li><li>Clinton Oledan</li><li>Julius Warren Jimbul</li><li>Janssen Paul Jimbul</li><li>Jesus Arbois</li><li>Aldrine Arbois</li>
             </ul>
         </div>
+
+        <div class="entourage-list">
+            <h3>18 Gifts</h3>
+            <ul class="name-columns">
+                <li>Harold Llegue</li><li>Shame Tiongson</li><li>Jhing Sergio</li><li>Jezzel Acorin</li><li>Isaiah James Aquino</li><li>Mihai Thea Terso</li><li>Jenia Irish Aralar</li><li>Maria Elizabeth Sotelo</li><li>Kate Dela Cruz</li><li>Seyah Legara</li><li>Jv Edanio</li><li>Ashley Carreon</li><li>Jyasmeen Emerald Jimbul</li><li>Haleiyah Mhaczel</li><li>Katrina Fajardo</li><li>Raymond Ng</li><li>Arieza Melda</li><li>Carielle Jade Geronimo</li><li>Quinn Hayley Riota</li><li>Ranella Barin</li><li>Jomken Mabinis</li>
+            </ul>
+        </div>
+
+        <div class="entourage-list">
+            <h3>18 Shots</h3>
+            <ul class="name-columns">
+                <li>Dyzoe Lagarto</li><li>Yza Onasin</li><li>Krystal Cugana</li><li>Sandro Kelly Tulagan</li><li>Marcus Aeon Banzagales</li><li>Jhuleand Aizack Caballa</li><li>Emerson Gumarao</li><li>Alexander Laureano</li><li>Justine Elizalde</li><li>Kenji Cuadra</li><li>Jhauseff Soberano</li><li>Chelsea Vela</li><li>Ashley</li><li>Renz Inductivo</li><li>Archer Montes</li><li>Shin Paner</li><li>Lance Granel</li><li>Jay Lumot</li><li>Adley Gallanongo</li><li>Ian Oledan</li><li>Rusty Galvan</li>
+            </ul>
+        </div>
+
+        <div class="entourage-list">
+            <h3>18 Blue Bills</h3>
+            <ul class="name-columns">
+                <li>Marciana Arbois</li><li>Janessa Irish Jimbul</li><li>Julius Warren Jimbul</li><li>Prince Maliwat</li><li>Jessyl Arbojs</li><li>Jessmine Arbois</li><li>Jay Ann Arbois</li><li>Rozel Bugayong</li><li>Jhed Paglinawan</li><li>Cj Durante</li><li>Ludes Joy Jimbul</li><li>Jordennis Prejillana</li><li>Jhem San Juan</li><li>Realyn Puli</li><li>Mike Dela Cruz</li><li>Thessa Basallage</li><li>Manny Merete</li><li>Luz Prejillana</li><li>Isaiah Pacpaco</li>
+            </ul>
+        </div>
+
     </div>
 
     <div class="extras">
@@ -296,5 +326,6 @@
 
 </body>
 </html>
+
 
 

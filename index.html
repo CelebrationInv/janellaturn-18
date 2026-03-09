@@ -62,6 +62,7 @@
     .envelope-open .left-flap { transform: translateX(-100%); }
     .envelope-open .right-flap { transform: translateX(100%); }
 
+    /* --- MAIN CONTENT CONTAINER --- */
     .container {
         max-width: 900px;
         margin: 20px auto;
@@ -76,6 +77,7 @@
 
     body.opened .container { opacity: 1; transform: translateY(0); }
 
+    /* --- IMAGE CAROUSEL --- */
     .carousel-container {
         position: relative;
         width: 100%;
@@ -114,6 +116,7 @@
         border-right: 4px solid #ff3333;
     }
 
+    /* --- ENTOURAGE LISTS --- */
     .entourage-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -138,9 +141,11 @@
 
     .name-columns li { padding: 2px 0; font-size: 0.85em; font-weight: 300; border-bottom: 1px solid #222; }
 
+    /* --- GIFT SECTION --- */
     .gift-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 500px; margin: 0 auto; }
     .gift-item { background: #1a1a1a; padding: 10px; border: 1px solid #8b0000; border-radius: 4px; font-size: 0.9em; text-transform: uppercase; text-align: center;}
 
+    /* --- BUTTON STYLES --- */
     .btn-container { text-align: center; margin: 20px 0; }
     .btn {
         display: inline-block;
@@ -209,7 +214,7 @@
         <p>DATE: <span class="highlight">MARCH 21, 2026</span></p>
         <p>TIME: <span class="highlight">4:00 PM - 9:00 PM</span></p>
         <div class="btn-container">
-            <a href="https://www.google.com/maps/contrib/111094082304762592337/reviews" target="_blank" class="btn">📍 View Location</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=28+San+Pedro+Novaliches+Quezon+City" target="_blank" class="btn">📍 View Location on Map</a>
             <p style="font-size: 0.9em; margin-top: 10px;">28 San Pedro, Novaliches, QC</p>
         </div>
     </div>
@@ -261,33 +266,22 @@
 <script>
     function openCard() {
         document.querySelector('.envelope-content').style.opacity = '0';
-        setTimeout(() => {
-            document.querySelector('.envelope-content').style.display = 'none';
-        }, 500);
-
+        setTimeout(() => { document.querySelector('.envelope-content').style.display = 'none'; }, 500);
         const env = document.getElementById('envelope');
         env.classList.add('envelope-open');
-        
         setTimeout(() => { env.style.visibility = 'hidden'; }, 1500);
-
         document.body.classList.remove('no-scroll');
         document.body.classList.add('opened');
     }
 
     function closeCard() {
-        // Reset everything to go back to front
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
         setTimeout(() => {
             const env = document.getElementById('envelope');
             env.style.visibility = 'visible';
             env.classList.remove('envelope-open');
-            
             document.querySelector('.envelope-content').style.display = 'block';
-            setTimeout(() => {
-                document.querySelector('.envelope-content').style.opacity = '1';
-            }, 100);
-
+            setTimeout(() => { document.querySelector('.envelope-content').style.opacity = '1'; }, 100);
             document.body.classList.add('no-scroll');
             document.body.classList.remove('opened');
         }, 500);
@@ -302,5 +296,4 @@
 </script>
 
 </body>
-
 </html>

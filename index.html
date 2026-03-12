@@ -1,332 +1,653 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Janella's 18th Birthday Invitation</title>
+
 <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
 
+
+
     body {
+
         background-color: #0a0a0a;
+
         color: #ffffff;
+
         font-family: 'Montserrat', sans-serif;
+
         margin: 0;
+
         padding: 0;
+
         line-height: 1.4;
+
         overflow-x: hidden;
+
     }
+
+
 
     body.no-scroll { overflow: hidden; }
 
+
+
     /* --- ENVELOPE OPENING EFFECT --- */
+
     #envelope {
+
         position: fixed;
+
         top: 0; left: 0;
+
         width: 100%; height: 100vh;
+
         z-index: 9999;
+
         display: flex;
+
         justify-content: center;
+
         align-items: center;
+
         transition: opacity 0.5s ease;
+
     }
+
+
 
     #envelope.envelope-open { pointer-events: none; }
 
+
+
     .flap {
+
         position: absolute;
+
         top: 0; width: 50%; height: 100%;
+
         background-color: #050505;
+
         z-index: 1;
+
         transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+
         box-shadow: inset 0 0 50px rgba(139, 0, 0, 0.4);
+
     }
+
+
 
     .left-flap { left: 0; border-right: 2px solid #8b0000; }
+
     .right-flap { right: 0; border-left: 2px solid #8b0000; }
 
+
+
     .envelope-content {
+
         position: relative;
+
         z-index: 2;
+
         text-align: center;
+
         background: rgba(10, 10, 10, 0.95);
+
         padding: 40px;
+
         border: 2px solid #ff3333;
+
         box-shadow: 0 0 30px rgba(255, 51, 51, 0.4);
+
         transition: opacity 0.5s ease;
+
     }
+
+
 
     .envelope-title { font-family: 'Cinzel', serif; font-size: 3em; margin: 0; letter-spacing: 4px; }
+
     .envelope-subtitle { color: #ff3333; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
 
+
+
     .envelope-open .left-flap { transform: translateX(-100%); }
+
     .envelope-open .right-flap { transform: translateX(100%); }
 
+
+
     /* --- MAIN CONTENT CONTAINER --- */
+
     .container {
+
         max-width: 900px;
+
         margin: 20px auto;
+
         padding: 30px;
+
         border: 2px solid #8b0000; 
+
         box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+
         background: linear-gradient(135deg, #111111 0%, #000000 100%);
+
         opacity: 0;
+
         transform: translateY(20px);
+
         transition: all 1.5s ease 0.5s; 
+
     }
+
+
 
     body.opened .container { opacity: 1; transform: translateY(0); }
 
+
+
     /* --- IMAGE CAROUSEL --- */
+
     .carousel-container {
+
         position: relative;
+
         width: 100%;
+
         max-width: 800px;
+
         margin: 0 auto 30px auto;
+
         overflow: hidden;
+
         border: 2px solid #8b0000;
+
         border-radius: 8px;
+
     }
+
+
 
     .carousel-track { display: flex; transition: transform 0.6s ease-in-out; }
+
     .carousel-slide { min-width: 100%; height: 400px; object-fit: cover; }
 
+
+
     .carousel-btn {
+
         position: absolute;
+
         top: 50%; transform: translateY(-50%);
+
         background-color: rgba(10, 10, 10, 0.7);
+
         color: #ff3333; border: 1px solid #ff3333;
+
         font-size: 1.5rem; padding: 5px 10px; cursor: pointer; z-index: 10;
+
     }
+
+
 
     .prev-btn { left: 10px; }
+
     .next-btn { right: 10px; }
 
+
+
     h1, h2, h3 { font-family: 'Cinzel', serif; text-align: center; text-transform: uppercase; margin: 15px 0; }
+
     h1 { font-size: 2.2em; color: #ff3333; letter-spacing: 2px; }
+
     h2 { font-size: 1.5em; color: #ffffff; border-bottom: 1px solid #8b0000; padding-bottom: 5px; }
+
     h3 { color: #ff3333; font-size: 1.1em; letter-spacing: 1px; }
 
+
+
     .details {
+
         text-align: center;
+
         margin: 20px 0;
+
         padding: 15px;
+
         background-color: #1a1a1a;
+
         border-left: 4px solid #ff3333;
+
         border-right: 4px solid #ff3333;
+
     }
+
+
 
     /* --- ENTOURAGE LISTS --- */
+
     .entourage-grid {
+
         display: grid;
+
         grid-template-columns: 1fr;
+
         gap: 15px;
+
         margin-top: 20px;
+
     }
+
+
 
     @media (min-width: 700px) {
+
         .entourage-grid { grid-template-columns: 1fr 1fr; }
+
     }
+
+
 
     .entourage-list {
+
         background-color: #111;
+
         padding: 15px;
+
         border: 1px solid #333;
+
     }
 
+
+
     .name-columns {
+
         display: grid;
+
         grid-template-columns: 1fr 1fr;
+
         gap: 8px;
+
         list-style: none;
+
         padding: 0;
+
         text-align: center;
+
     }
+
+
 
     .name-columns li { padding: 4px 0; font-size: 0.85em; font-weight: 300; border-bottom: 1px solid #222; }
 
+
+
     /* --- GIFT SECTION --- */
+
     .gift-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 500px; margin: 0 auto; }
+
     .gift-item { background: #1a1a1a; padding: 10px; border: 1px solid #8b0000; border-radius: 4px; font-size: 0.9em; text-transform: uppercase; text-align: center;}
 
+
+
     /* --- BUTTON STYLES --- */
+
     .btn-container { text-align: center; margin: 20px 0; }
+
     .btn {
+
         display: inline-block;
+
         padding: 10px 25px;
+
         margin: 5px;
+
         color: #ffffff;
+
         text-decoration: none;
+
         font-family: 'Cinzel', serif;
+
         font-weight: bold;
+
         border: 2px solid #ff3333;
+
         background: transparent;
+
         text-transform: uppercase;
+
         cursor: pointer;
+
         transition: 0.3s;
+
     }
+
     .btn:hover { background: #ff3333; color: #000; }
 
+
+
     .fb-rsvp-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+
     .fb-btn { padding: 8px 20px; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 0.85em; transition: 0.3s; }
+
     .follow-btn { background-color: #ff3333; color: white; }
+
     .message-btn { background-color: #333; color: white; }
 
+
+
     .extras { text-align: center; margin-top: 30px; border-top: 1px dashed #8b0000; padding-top: 20px; }
+
     .highlight { color: #ff3333; font-weight: bold; }
+
     
+
     .latecomer-note {
+
         color: #ff3333;
+
         font-weight: 700;
+
         margin-top: 30px;
+
         text-transform: uppercase;
+
         letter-spacing: 2px;
+
         font-size: 0.9em;
+
         text-align: center;
+
     }
+
 </style>
+
 </head>
+
 <body class="no-scroll">
 
+
+
 <div id="envelope">
+
     <div class="flap left-flap"></div>
+
     <div class="flap right-flap"></div>
+
     <div class="envelope-content">
+
         <h1 class="envelope-title">Janella</h1>
+
         <p class="envelope-subtitle">18th Birthday Celebration</p>
+
         <button class="btn open-btn" onclick="openCard()">Open Invitation</button>
+
     </div>
+
 </div>
+
+
 
 <div class="container">
+
     <div class="carousel-container">
+
         <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">❮</button>
+
         <div class="carousel-track" id="track">
+
             <img src="1.jpg" class="carousel-slide" alt="Janella 1" onerror="this.src='https://via.placeholder.com/800x450/111/f00?text=Photo+1'">
+
             <img src="2.jpg" class="carousel-slide" alt="Janella 2" onerror="this.src='https://via.placeholder.com/800x450/111/f00?text=Photo+2'">
+
             <img src="3.jpg" class="carousel-slide" alt="Janella 3" onerror="this.src='https://via.placeholder.com/800x450/111/f00?text=Photo+3'">
+
             <img src="4.jpg" class="carousel-slide" alt="Janella 4" onerror="this.src='https://via.placeholder.com/800x450/111/f00?text=Photo+4'">
+
             <img src="5.jpg" class="carousel-slide" alt="Janella 5" onerror="this.src='https://via.placeholder.com/800x450/111/f00?text=Photo+5'">
+
         </div>
+
         <button class="carousel-btn next-btn" onclick="moveSlide(1)">❯</button>
+
     </div>
+
+
 
     <h1>Janella Turns 18</h1>
+
     <p>Join us for an unforgettable evening of elegance, wrapped in striking crimson and midnight.</p>
 
+
+
     <div class="details">
+
         <p>DATE: <span class="highlight">MARCH 21, 2026</span></p>
+
         <p>TIME: <span class="highlight">4:00 PM - 9:00 PM</span></p>
+
         <div class="btn-container">
+
             <a href="https://www.google.com/maps/search/?api=1&query=28+San+Pedro,+Novaliches,+Quezon+City" target="_blank" class="btn">📍 View Location on Map</a>
+
             <p style="font-size: 0.9em; margin-top: 10px;">28 San Pedro, Novaliches, QC</p>
+
         </div>
+
     </div>
+
+
 
     <h2>The Entourage</h2>
+
     <div class="entourage-grid">
+
         
+
         <div class="entourage-list">
+
             <h3>18 Candles</h3>
+
             <ul class="name-columns">
-                <li>Alisha Loraine Manalo</li><li>Nicole Goña</li><li>Xiamara Goña</li><li>Eden Prejillana</li><li>Jose Carlos Orogo</li><li>Janna Paula Jimbul</li><li>Alex Intoy</li><li>Aireen Mercado</li><li>Jillian Taparan</li><li>Reynalyn Bermudo</li><li>Jacob Salmingo</li><li>Ken Dela Cruz</li><li>Cheryl Estrella</li><li>Alexander Dizon</li><li>Johnlloyd Lucasia</li><li>Jyasie Scarlette Arbois</li><li>Aldrine Arbois</li><li>Luz Prejillana</li>
+
+                <li>Alisha Loraine Manalo</li><li>Nicole Goña</li><li>Xiamara</li><li> GoñaYna arbois</li><li>Eden Prejillana</li><li>Jose Carlos Orogo</li><li>Janna Paula Jimbul</li><li>Alex Intoy</li><li>Aireen Mercado</li><li>Jillian Taparan</li><li>Reynalyn Bermudo</li><li>Jacob Salmingo</li><li>Ken Dela Cruz</li><li>Cheryl Estrella</li><li>Alexander Dizon</li><li>Johnlloyd Lucasia</li><li>Jyasie Scarlette Arbois</li><li>Aldrine Arbois</li><li>Luz Prejillana</li>
+
             </ul>
+
         </div>
 
+
+
         <div class="entourage-list">
+
             <h3>18 Roses</h3>
+
             <ul class="name-columns">
+
                 <li>Jordennis Prejillana</li><li>Enzi Carter Valenzuela</li><li>Christian Ivan Sabangan</li><li>Marcus Aeon Banzagales</li><li>Hero Vicoy</li><li>Jerome Ronnie Lopez</li><li>Reyan Mathew Reyes</li><li>Reymundo Mateo</li><li>Cyron Florendo</li><li>Justin Edanio</li><li>Lance Kratos San Juan</li><li>Joy Legazpi</li><li>Jamil Arbois</li><li>Clinton Oledan</li><li>Julius Warren Jimbul</li><li>Janssen Paul Jimbul</li><li>Jesus Arbois</li><li>Aldrine Arbois</li>
+
             </ul>
+
         </div>
 
+
+
         <div class="entourage-list">
+
             <h3>18 Gifts</h3>
+
             <ul class="name-columns">
-                <li>Harold Llegue</li><li>Shame Tiongson</li><li>Jhing Sergio</li><li>Jezzel Acorin</li><li>Isaiah James Aquino</li><li>Mihai Thea Terso</li><li>Jenia Irish Aralar</li><li>Maria Elizabeth Sotelo</li><li>Kate Dela Cruz</li><li>Seyah Legara</li><li>Jv Edanio</li><li>Ashley Carreon</li><li>Jyasmeen Emerald Jimbul</li><li>Haleiyah Mhaczel</li><li>Katrina Fajardo</li><li>Raymond Ng</li><li>Arieza Melda</li><li>Carielle Jade Geronimo</li><li>Quinn Hayley Riota</li><li>Ranell Barin</li><li>Jomken Mabinis</li>
+
+                <li>Harold Llegue</li><li>Shame Tiongson</li><li>Jhing Sergio</li><li>Jezzel Acorin</li><li>Isaiah James Aquino</li><li>Mihai Thea Terso</li><li>Jenia Irish Aralar</li><li>Maria Elizabeth Sotelo</li><li>Kate Dominguez</li><li>Seyah Legara</li><li>Jv Edanio</li><li>Ashley Carreon</li><li>Jyasmeen Emerald Jimbul</li><li>Haleiyah Mhaczel</li><li>Katrina Fajardo</li><li>Raymond Ng</li><li>Arieza Melda</li><li>Carielle Jade Geronimo</li><li>Quinn Hayley Riota</li><li>Ranell Barin</li><li>Jomken Mabinis</li>
+
             </ul>
+
         </div>
 
+
+
         <div class="entourage-list">
+
             <h3>18 Shots</h3>
+
             <ul class="name-columns">
+
                 <li>Dyzoe Lagarto</li><li>Yza Onasin</li><li>Krystal Cugana</li><li>Sandro Kelly Tulagan</li><li>Adley Gallanongo</li><li>Jhuleand Aizack Caballa</li><li>Emerson Gumarao</li><li>Alexander Laureano</li><li>Justine Elizalde</li><li>Kenji Cuadra</li><li>Jhauseff Soberano</li><li>Chelsea Vela</li><li>Ashley</li><li>Renz Inductivo</li><li>Archer Montes</li><li>Shin Paner</li><li>Lance Granel</li><li>Jay Lumot</li><li>Ian Oledan</li><li>Rusty Galvan</li>
+
             </ul>
+
         </div>
 
+
+
         <div class="entourage-list">
+
             <h3>18 Blue Bills</h3>
+
             <ul class="name-columns">
-                <li>Marciana Arbois</li><li>Janessa Irish Jimbul</li><li>Julius Warren Jimbul</li><li>Prince Maliwat</li><li>Jessyl Arbojs</li><li>Jessmine Arbois</li><li>Jay Ann Arbois</li><li>Rozel Bugayong</li><li>Jhed Paglinawan</li><li>Cj Durante</li><li>Ludes Joy Jimbul</li><li>Jordennis Prejillana</li><li>Jhem San Juan</li><li>Realyn Puli</li><li>Mike Dela Cruz</li><li>Thessa Basallage</li><li>Manny Merete</li><li>Luz Prejillana</li><li>Isaiah Pacpaco</li>
+
+                <li>Marciana Arbois</li><li>Janessa Irish Jimbul</li><li>Julius Warren Jimbul</li><li>Prince Maliwat</li><li>Jessyl Arbois</li><li>Jessmine Arbois</li><li>Jay Ann Arbois</li><li>Rozel Bugayong</li><li>Jhed Paglinawan</li><li>Cj Durante</li><li>Ludes Joy Jimbul</li><li>Jordennis Prejillana</li><li>Jhem San Juan</li><li>Realyn Puli</li><li>Mike Dela Cruz</li><li>Thessa Basallage</li><li>Manny Merete</li><li>Luz Prejillana</li><li>Isaiah Pacpaco</li>
+
             </ul>
+
         </div>
+
+
 
     </div>
+
+
 
     <div class="extras">
+
         <h2>Gift Ideas</h2>
+
         <p style="font-size: 0.9em; text-transform: uppercase; margin-bottom: 15px;">Your presence on my special day is the best gift I could ever ask for. If you'd like to give a gift, I kindly appreciate with all gifts in forms of:</p>
+
         <div class="gift-grid">
+
             <div class="gift-item">Clothes</div>
+
             <div class="gift-item">Makeup</div>
+
             <div class="gift-item">Perfume</div>
+
             <div class="gift-item">Bag</div>
+
         </div>
+
+
 
         <h2 style="margin-top: 30px;">Dress Code</h2>
+
         <p>STRICTLY <span class="highlight">BLACK</span> ONLY (Semi-Formal)</p>
+
         
+
         <h2>RSVP</h2>
+
         <p>Please respond before <span class="highlight">March 21 </span></p>
+
         <div class="fb-rsvp-container">
+
             <a href="https://www.facebook.com/janellavhianca.arbois" target="_blank" class="fb-btn follow-btn">Profile</a>
+
             <a href="https://m.me/janellavhianca.arbois" target="_blank" class="fb-btn message-btn">Messenger</a>
+
         </div>
 
-        <p class="latecomer-note">Strictly no late comers</p>
+
+
+        <p class="latecomer-note">Strictly no late comers and no plus one </p>
+
+
 
         <div class="btn-container" style="margin-top: 50px;">
+
             <button class="btn" onclick="closeCard()" style="border-color: #555; font-size: 0.8em;">Back to Cover</button>
+
         </div>
+
     </div>
+
 </div>
 
+
+
 <script>
+
     function openCard() {
+
         document.querySelector('.envelope-content').style.opacity = '0';
+
         setTimeout(() => { document.querySelector('.envelope-content').style.display = 'none'; }, 500);
+
         const env = document.getElementById('envelope');
+
         env.classList.add('envelope-open');
+
         setTimeout(() => { env.style.visibility = 'hidden'; }, 1500);
+
         document.body.classList.remove('no-scroll');
+
         document.body.classList.add('opened');
+
     }
+
+
 
     function closeCard() {
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
         setTimeout(() => {
+
             const env = document.getElementById('envelope');
+
             env.style.visibility = 'visible';
+
             env.classList.remove('envelope-open');
+
             document.querySelector('.envelope-content').style.display = 'block';
+
             setTimeout(() => { document.querySelector('.envelope-content').style.opacity = '1'; }, 100);
+
             document.body.classList.add('no-scroll');
+
             document.body.classList.remove('opened');
+
         }, 500);
+
     }
+
+
 
     let slide = 0;
+
     function moveSlide(dir) {
+
         slide = (slide + dir + 5) % 5;
+
         document.getElementById('track').style.transform = `translateX(-${slide * 100}%)`;
+
     }
+
     setInterval(() => { if(document.body.classList.contains('opened')) moveSlide(1); }, 4000);
+
 </script>
 
+
+
 </body>
+
 </html>
-
-
-
-
-
